@@ -1,13 +1,17 @@
 # DOMINO: Domain-Specific Data Synthesis for LLMs via Minimal Sufficient Representation Learning
 
+Official implementation of KDD 2026 paper.
+
 DOMINO learns a **minimal sufficient representation** of a target domain from limited reference examples via soft prompt tuning and contrastive learning.
 
 ## Method Overview
 
+![DOMINO Architecture](assets/arch.png)
+
 DOMINO trains two types of learnable continuous soft tokens:
 
-- **Domain-level soft tokens** (D*): Shared across all reference samples, capturing generalizable domain patterns.
-- **Sample-level soft tokens** (S^i): Unique per sample, encoding sample-specific information.
+- **Domain-level soft tokens**: Shared across all reference samples, capturing generalizable domain patterns.
+- **Sample-level soft tokens**: Unique per sample, encoding sample-specific information.
 
 The training objective consists of two terms:
 
@@ -17,7 +21,6 @@ The training objective consists of two terms:
 
 The final loss is a weighted combination of the two. After training, only D* is used for data synthesis, generating diverse in-domain samples that generalize beyond the reference set.
 
-![DOMINO Architecture](assets/arch.png)
 
 ## Directory Structure
 
