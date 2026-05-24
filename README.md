@@ -17,7 +17,7 @@ The training objective consists of two terms:
 
 The final loss is a weighted combination of the two. After training, only D* is used for data synthesis, generating diverse in-domain samples that generalize beyond the reference set.
 
-![DOMINO Architecture](assets/arch.pdf)
+![DOMINO Architecture](assets/arch.png)
 
 ## Directory Structure
 
