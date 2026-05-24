@@ -11,13 +11,13 @@ DOMINO trains two types of learnable continuous soft tokens:
 - **Domain-level soft tokens**: Shared across all reference samples, capturing generalizable domain patterns.
 - **Sample-level soft tokens**: Unique per sample, encoding sample-specific information.
 
-The training objective consists of two terms:
+The training objective consists of two parts:
 
-1. **Domain-level likelihood:** Maximizes the likelihood of all reference data given domain-level soft tokens only, learning a sufficient representation for the domain.
+1. **Domain-level learning:** Teaches the domain-level soft tokens to reconstruct all reference samples, capturing what's common across the domain.
 
-2. **Contrastive loss:** The numerator ensures D* and S^i together reconstruct the original sample. The denominator penalizes using S^i to reconstruct other samples, forcing D* to focus on shared domain knowledge while S^i handles sample-specific details.
+2. **Contrastive learning:** Each sample has its own private soft tokens. The model learns to use private tokens only for their own sample — using them on other samples should fail. This forces domain-level tokens to focus on shared knowledge, not sample-specific details.
 
-The final loss is a weighted combination of the two. After training, only D* is used for data synthesis, generating diverse in-domain samples that generalize beyond the reference set.
+The final loss balances both objectives. During synthesis, only domain-level tokens are used, producing diverse in-domain samples rather than memorized copies of the reference data.
 
 
 ## Directory Structure
