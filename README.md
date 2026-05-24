@@ -13,9 +13,9 @@ DOMINO trains two types of learnable continuous soft tokens:
 
 The training objective consists of two parts:
 
-1. **Domain-level learning:** Teaches the domain-level soft tokens to reconstruct all reference samples, capturing what's common across the domain.
+1. **Domain-level learning:** Trains the domain-level soft tokens to reconstruct all reference samples, capturing common features/patterns across the domain.
 
-2. **Contrastive learning:** Each sample has its own private soft tokens. The model learns to use private tokens only for their own sample — using them on other samples should fail. This forces domain-level tokens to focus on shared knowledge, not sample-specific details.
+2. **Contrastive learning:** Each sample has its own private soft tokens. The model learns to use private tokens only for its own sample. This forces domain-level tokens to focus on shared knowledge, not sample-specific details.
 
 The final loss balances both objectives. During synthesis, only domain-level tokens are used, producing diverse in-domain samples rather than memorized copies of the reference data.
 
