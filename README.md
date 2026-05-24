@@ -13,9 +13,9 @@ DOMINO trains two types of learnable continuous soft tokens:
 
 The training objective consists of two terms:
 
-**1. Domain-level likelihood:** Maximizes the likelihood of all reference data given domain-level soft tokens only, learning a sufficient representation for the domain.
+1. **Domain-level likelihood:** Maximizes the likelihood of all reference data given domain-level soft tokens only, learning a sufficient representation for the domain.
 
-**2. Contrastive loss:** The numerator ensures D* and S^i together reconstruct the original sample. The denominator penalizes using S^i to reconstruct other samples, forcing D* to focus on shared domain knowledge while S^i handles sample-specific details.
+2. **Contrastive loss:** The numerator ensures D* and S^i together reconstruct the original sample. The denominator penalizes using S^i to reconstruct other samples, forcing D* to focus on shared domain knowledge while S^i handles sample-specific details.
 
 The final loss is a weighted combination of the two. After training, only D* is used for data synthesis, generating diverse in-domain samples that generalize beyond the reference set.
 
