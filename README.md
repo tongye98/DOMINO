@@ -6,33 +6,18 @@ DOMINO learns a **minimal sufficient representation** of a target domain from li
 
 DOMINO trains two types of learnable continuous soft tokens:
 
-- **Domain-level soft tokens** $\mD^*$: Shared across all reference samples, capturing generalizable domain patterns.
-- **Sample-level soft tokens** $\mS^{(i)}$: Unique per sample, encoding sample-specific information.
+- **Domain-level soft tokens** (D*): Shared across all reference samples, capturing generalizable domain patterns.
+- **Sample-level soft tokens** (S^i): Unique per sample, encoding sample-specific information.
 
 The training objective consists of two terms:
 
-**1. Domain-level likelihood** (Eq 1 in paper):
-\[
-\mathcal{L}_1 = -\frac{1}{n} \sum_{i=1}^n \log p(\mX^{(i)}|\mD)
-\]
-Maximizes the likelihood of all reference data given domain-level soft tokens only, learning a sufficient representation for the domain.
+**1. Domain-level likelihood:** Maximizes the likelihood of all reference data given domain-level soft tokens only, learning a sufficient representation for the domain.
 
-**2. Contrastive loss** (Eq 2 in paper):
-\[
-\mathcal{L}_2 = -\frac{1}{n} \sum_{i=1}^n \log \frac{p(\mX^{(i)}|\mD^*,\mS^{(i)})}{\sum_{j\neq i} p(\mX^{(j)}|\mD^*,\mS^{(i)})}
-\]
-The numerator ensures $\mD^*$ and $\mS^{(i)}$ together reconstruct $\mX^{(i)}$. The denominator penalizes using $\mS^{(i)}$ to reconstruct other samples $\mX^{(j)}$, forcing $\mD^*$ to focus on shared domain knowledge while $\mS^{(i)}$ handles sample-specific details.
+**2. Contrastive loss:** The numerator ensures D* and S^i together reconstruct the original sample. The denominator penalizes using S^i to reconstruct other samples, forcing D* to focus on shared domain knowledge while S^i handles sample-specific details.
 
-**Final loss** (Eq 3 in paper):
-\[
-\mathcal{L} = \mathcal{L}_1 + \lambda \mathcal{L}_2
-\]
+The final loss is a weighted combination of the two. After training, only D* is used for data synthesis, generating diverse in-domain samples that generalize beyond the reference set.
 
-After training, only $\mD^*$ is used for data synthesis, generating diverse in-domain samples that generalize beyond the reference set.
-
-Refer to Section~\ref{sec:method} of the paper for theoretical justifications, including proofs that $\mathcal{L}_2$ maximizes $I(\mS^{(i)};\mX^{(i)}|\mD^*)$ and minimizes $I(\mS^{(i)};\mD^*)$, and that the learned $\mD^*$ achieves minimal sufficient representation.
-
-![DOMINO Architecture](assets/arch.png)
+![DOMINO Architecture](assets/arch.pdf)
 
 ## Directory Structure
 
