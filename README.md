@@ -1,7 +1,5 @@
 # DOMINO: Domain-Specific Data Synthesis for LLMs via Minimal Sufficient Representation Learning
 
-Official implementation of KDD 2026 paper.
-
 DOMINO learns a **minimal sufficient representation** of a target domain from limited reference examples via soft prompt tuning and contrastive learning.
 
 ## Method Overview
